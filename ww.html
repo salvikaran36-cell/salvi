@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Shravani ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  overflow-x:hidden;
+  background: linear-gradient(-45deg,#ff9bb3,#ffc0cb,#ff85a2,#ffd6e0);
+  background-size:400% 400%;
+  animation: gradientBG 10s ease infinite;
+  color:white;
+}
+
+@keyframes gradientBG{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.section{
+  position:absolute;
+  width:100%;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+  opacity:0;
+  transition:opacity 0.8s ease-in-out;
+}
+
+.active{
+  opacity:1;
+  z-index:1;
+}
+
+.card{
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(15px);
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.2);
+  max-width:650px;
+}
+
+h1,h2{
+  font-family:'Playfair Display',serif;
+}
+
+button{
+  margin-top:20px;
+  padding:14px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  transition:0.3s ease;
+}
+
+#yesBtn{
+  background:#ff4d6d;
+  color:white;
+  box-shadow:0 0 15px #ff4d6d;
+  animation:glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+  from{box-shadow:0 0 10px #ff4d6d;}
+  to{box-shadow:0 0 25px #fff;}
+}
+
+#yesBtn:hover{
+  transform:scale(1.1);
+}
+
+#noBtn{
+  background:#888;
+  color:white;
+  margin-left:15px;
+  position:relative;
+}
+
+.heart{
+  position:fixed;
+  top:-10px;
+  color:white;
+  animation:fall linear forwards;
+  pointer-events:none;
+  opacity:0.8;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(100vh);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="until-i-found-you.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="section active" id="page1">
+  <div class="card">
+    <h1>Hi Shravani ❤️</h1>
+    <p>I made something special for you...</p>
+    <button onclick="nextPage(2)">Open My Heart 💌</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="section" id="page2">
+  <div class="card">
+    <h2>Why I Love You ❤️</h2>
+    <p>
+    ❤️ You make my ordinary days magical.<br><br>
+    ❤️ Your voice during our late night calls.<br><br>
+    ❤️ The comfort I feel knowing you're mine.<br><br>
+    ❤️ The way you understand me without words.<br><br>
+    ❤️ Simply because you are you.
+    </p>
+    <button onclick="nextPage(3)">Next 💕</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="section" id="page3">
+  <div class="card">
+    <h2>Our Late Night Calls 🌙</h2>
+    <p>
+    Those endless conversations at 2 AM...
+    laughing, dreaming, talking about everything and nothing.
+    Even through a screen, time disappears when I'm with you.
+    Those moments mean more to me than you know.
+    </p>
+    <button onclick="nextPage(4)">One More Thing ❤️</button>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="section" id="page4">
+  <div class="card">
+    <h2>Shravani ❤️</h2>
+
+    <p>
+    Until I found you, I didn’t know love could feel this calm,
+    this deep, this real. You are my today, my tomorrow,
+    and my forever.
+    </p>
+
+    <h2 style="margin-top:25px;">
+      Will you be my Valentine? 💖
+    </h2>
+
+    <div style="margin-top:20px;">
+      <button id="yesBtn" onclick="sayYes()">Yes ❤️</button>
+      <button id="noBtn" onmouseover="moveNo()">No 🙈</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+/* Page Switch */
+function nextPage(num){
+  document.querySelector(".active").classList.remove("active");
+  document.getElementById("page"+num).classList.add("active");
+}
+
+/* Floating Hearts */
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="❤";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*3+3)+"s";
+  heart.style.fontSize=(Math.random()*20+10)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,500);
+
+/* Music Fade-in (iPhone Safe) */
+window.addEventListener("click",function(){
+  const music=document.getElementById("bgMusic");
+  music.volume=0;
+  music.play();
+  let fade=setInterval(()=>{
+    if(music.volume<0.5){
+      music.volume+=0.05;
+    } else{
+      clearInterval(fade);
+    }
+  },200);
+},{once:true});
+
+/* Yes Growth */
+let yesSize=18;
+function sayYes(){
+  yesSize+=5;
+  const yesBtn=document.getElementById("yesBtn");
+  yesBtn.style.fontSize=yesSize+"px";
+  yesBtn.style.padding=(yesSize/1.2)+"px "+(yesSize*2)+"px";
+
+  if(yesSize>40){
+    document.body.innerHTML=`
+    <div style="display:flex;flex-direction:column;justify-content:center;
+    align-items:center;height:100vh;text-align:center;color:white;">
+      <h1 style="font-family:'Playfair Display';font-size:40px;">YAYYY ❤️</h1>
+      <p style="max-width:600px;font-size:22px;">
+      You just made me the happiest person alive.
+      You are my today, my tomorrow, and my forever.
+      </p>
+      <h2 style="margin-top:30px;">Forever Yours,<br>Karan 💕</h2>
+    </div>`;
+  }
+}
+
+/* No Button Runs */
+function moveNo(){
+  const noBtn=document.getElementById("noBtn");
+  const x=Math.random()*(window.innerWidth-100);
+  const y=Math.random()*(window.innerHeight-50);
+  noBtn.style.position="absolute";
+  noBtn.style.left=x+"px";
+  noBtn.style.top=y+"px";
+}
+
+</script>
+
+</body>
+</html>
